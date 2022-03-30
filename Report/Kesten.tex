@@ -1,0 +1,72 @@
+\documentclass[FinalReport.tex]{subfiles}
+\begin{document}
+
+\section{Analysis as a Kesten Process}
+When $n$ is sufficiently large, $\hat{\alpha}_0^{(n)}$ is normally distributed around the ground truth $\alpha_0$ with variance $s_n^2$. It is then possible to rewrite
+\begin{equation}
+	c_t = \alpha_0-s_n\xi_t\,\sim\mathcal{N}(\alpha_0,s_n^2),	
+\end{equation}
+where $\xi_t\sim\mathcal{N}(0,1)$. Replacing in the dynamical equation \eqref{eq:map} one gets
+\begin{equation}\label{eq:dyn_kesten}
+	z_{t+1}=a_t z_t+\beta_t, \quad \text{with } a_t=s_n\xi_t	\sim\N(0,s_n^2).
+\end{equation}
+This stochastic equation, known as a Kesten process \cite{kesten}, is a mixture of multiplicative and additive process, with $a_t$ and $\beta_t$ i.i.d. normally distributed random variables. This process has been used in different disciplines, such as in the modeling of 1D disordered systems \cite{kesten-process-physics}, the study of synaptic size dynamics \cite{kesten-process-synapse-2,kesten-synapses} and economics \cite{kesten-econ}.
+
+The average of \eqref{eq:dyn_kesten} squared,
+\begin{equation}
+	\E{z_{t+1}^2}=\E{a_t^2}\E{z_t^2}+\E{\beta_t^2},	
+\end{equation}
+admits a stationary solution for $\E{a_t^2}<1$
+\begin{equation}\label{eq:cond_stat_sol}	
+	\E{z_t^2}=\frac{\sigma_0^2}{1-\E{a_t^2}}.	
+\end{equation}
+
+
+In absence of noise ($\beta_t\equiv0$) the process converges to $0$ if $\E{\log{\abs{a_t}}}<0$ (similar to the condition $\E{a_t^2}<1$) \cite{constrained-convergent-processes}. Given $a_t=s_n\xi_t$ and $s_n\propto 1/n$, this condition is easily met\footnote{From Jensen's inequality applied to $e^X=e^{\log{\abs{a_t}}}$: $e^{\expval{\log{\abs{a_t}}}}\leq \E{e^{\log{\abs{a_t}}}} = \E{e^{\log(s_n) +\frac{1}{2}\log(\frac{2}{\pi})}}$. Taking the log on both sides gives $\E{\abs{a_t}}\leq \log(s_n)+\frac{1}{2}\log{\frac{2}{\pi} }<0 $ for $s_n\lessapprox1.25$.}. Besides, $a_t$ can also take values larger than $1$ with probability $P(\abs{a_t}>1)=P(\abs{\xi_t}>1/s_n)\approx0.54$ for $s_n=1$, giving birth to intermittent amplifications. Turning noise on pushes back the solution from the origin, acting as a reinjection of the dynamics. Those two elements generate intermittency in the solution, with a power law distribution for $z_t$ \cite{lin-stochastic-eq-nonlinear-properties}. 
+Using renewal theory, Kesten and Goldie proved \cite{kesten,goldie} the following results:
+\begin{enumerate}
+	\item If $a_t$ and $\xi_t$ are i.i.d. are real-valued random variables such that $\E{\log{\abs{a_t}}}<0$, then $z_t$ converges in distribution to a unique limiting distribution.
+	\item If, besides, $\beta_t/(1-a_t)$ is non degenerate (that is $\beta_t$ is not proportional to $a_t$), and if there exists a positive constant $\mu$ such that
+	\begin{enumerate}
+		\item $0<\E{\abs{\beta_t}^\mu}<+\infty$,\label{item:1st_cond} 
+		\item $\mu$ is defined by 
+			\begin{equation}\label{eq:cond_kest}
+			\E{\abs{a_t}^\mu}=1,
+			\end{equation}
+		\item and $\E{\abs{a_t}^\mu\log^+{\abs{a_t}}}<\infty$,
+	\end{enumerate}
+ then the tail of this distribution is a power law:
+ \begin{equation}
+ 	P_>(z)\sim Cz^{-\mu}.	
+ \end{equation}
+\end{enumerate}
+Condition \ref{item:1st_cond} simply states that $\beta_t$ doesn't have a fatter tail than $x^{-(1+\mu)}$, which is the case for Gaussian noise. The third condition is also met as $a_t$ is normally distributed. Equation \eqref{eq:cond_kest}, which holds for $\mu<2$ \cite{TST}, provides an effective way to compute the exponent $\mu$. Replacing $a_t=s_n\xi_t$ gives
+\begin{equation}
+	1\stackrel{!}{=}\E{\abs{a_t}^\mu}=\E{s_n^\mu \abs{\xi_t}^\mu}.
+\end{equation}
+This development is valid when $\hat{\alpha}_0^{(n)}$ is normally distributed, in which case $s_n=\sigma_0/(n\sigma_z)$. The condition becomes
+\begin{equation}\label{eq:cond_kest_1}
+	1\stackrel{!}{=}\E{\abs{a_t}^\mu}=s_n^\mu\E{ \abs{\xi_t}^\mu}=\frac{1}{n^\mu} \left(\frac{\sigma_0}{\sigma_z}\right)^\mu\E{\abs{\xi_t}^\mu}.
+\end{equation}
+The last factor is the absolute moment of a centered Gaussian random variable, which is given by
+\begin{equation}
+	\expval{\abs{\xi_t}^\mu}= \frac{2^{\mu/2}\Gamma\left(\frac{\mu+1} 2 \right)}{\sqrt\pi},
+\end{equation}
+and is valid for any real $\mu>-1$ \cite{moments}. Inverting equation \eqref{eq:cond_kest_1}, we obtain $n$ such that the limiting distribution of $z$ has exponent $\mu$:
+\begin{equation}
+	n^\mu=\left(\frac{\sigma_0}{\sigma_z}\right)^\mu\frac{2^{\mu/2}\Gamma\left(\frac{\mu+1} 2 \right)}{\sqrt\pi},
+\end{equation}
+i.e. $n\propto \left[\frac{1}{\sqrt{\pi}} \Gamma\left(\frac{\mu+1} 2 \right)\right]^{1/\mu} $. Using Stirling's approximation:
+\begin{equation}
+	\Gamma\left(\frac{\mu+1}{2}\right)=\sqrt{\frac{\pi}{\mu+1}}\,{\left(\frac{\mu+1}{2e}\right)}^{(\mu+1)/2} +\mathcal{O}\left(\frac{1}{\mu}\right), 
+\end{equation}
+which gives 
+\begin{equation}\label{eq:mu_kesten}
+	n\sim (\mu+1)^{-1/2\mu + (\mu+1)/2\mu}\sim (\mu+1)^{1/2}.
+\end{equation}
+This result seems in contradiction with Figure \ref{fig:max_exp_n}, but one should remind that it is valid only for large $n$, as it relies on Gaussian approximation of the estimator. However, numerical simulations have shown a shrinking tail for large $n$. Indeed, this predicted power law distribution holds for the tail only. As $n$ increases, the cutoff separating the tail gets larger, until it gets larger than the maximum deviation observed. At this point $P(z_t)$ is normally distributed. The final result \eqref{eq:mu_kesten} of this derivation is consequently not usable in practice, but still provides a theoretical basis demonstrating the intrinsic scaling behavior of \eqref{eq:map}. Besides, even though $c_t$ is not necessarily normally distributed for smaller $n$, equation \eqref{eq:cond_kest} holds as long the distribution of $\alpha_0-c_t$ respects the conditions stated above. This approach thus justifies the power law distribution qualitatively, and allows to compute the exponent if the distribution of $c_t$ is known.
+  
+
+
+
+\end{document}

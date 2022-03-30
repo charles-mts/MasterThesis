@@ -1,0 +1,52 @@
+\documentclass[FinalReport.tex]{subfiles}
+
+\begin{document}
+
+
+\section{Variance of the estimator ${\alpha}_0^{(n)}$}\label{app:var_a0}
+MLE estimator is asymptotically normal \cite{CoxHink74}, meaning
+\begin{equation}
+	\sqrt{n}(\hat{\alpha}_0^{(n)}-\alpha_0)\stackrel{d}{\rightarrow}\mathcal{N}(0,\mathcal{I}^{-1})
+\end{equation}
+where $\I$ is the Fisher information:
+\begin{equation}
+	\I\equiv\E{-\pdv[2]{\log{\mathcal{L}(\{z_{t-i-1}\}_{i=0}^n;\alpha_0,c_i^n)}}{\alpha_0} }.
+\end{equation}
+The log-likelihood is given by %\eqref{eq:log_lik_full}
+\begin{equation}\label{eq:log_lik_full}
+	\log{\mathcal{L}(\{z_{t-i-1}\}_{i=0}^n;\alpha_0,c_i^n)}=\sum_{i=0}^{n-1}\log\bigl(P(z_{t-i}\vert z_{t-i-1},\dots z_{t-n};\alpha_0,c_i^n)\bigr) + \log\bigl(P(z_{t-n}\vert \alpha_0;c_i^n)\bigr),	
+\end{equation}
+where $P(z_{t-i}\vert z_{t-i-1},\dots z_{t-n};\alpha_0,c_i^n)$ is Gaussian:
+\begin{equation}
+	P(z_{t-i}\vert z_{t-i-1},\dots z_{t-n};\alpha_0,c_i^n)=\frac{1}{\sqrt{2\pi\sigma_0^2}}e^{-\frac{1}{2\sigma_0^2}(z_{t-i}-(\alpha_0-c_{t-i-1})z_{t-i-1})^2}.
+\end{equation}
+Differentiating \eqref{eq:log_lik_full} twice gives
+\begin{equation}
+	\pdv[2]{\log{\mathcal{L}(\{z_{t-i-1}\}_{i=0}^n;\alpha_0,c_i^n)}}{\alpha_0}=-\frac{1}{\sigma_0^2}\sum_{i=0}^{n-1}z_{t-i-1}^2.
+\end{equation}
+Fischer information thus reads
+\begin{equation}
+\I=\frac{1}{\sigma_0^2}\E{\sum_{i=0}^{n-1}z_{t-i-1}^2},	
+\end{equation}
+and the variance of $\hat{\alpha}_0^{(n)}$ is 
+\begin{equation}\label{eq:var_a0_full}
+s_n^2=\frac{1}{n\I}=\frac{\sigma_0^2}{n\E{\sum_{i=0}^{n-1}z_{t-i-1}^2}}.
+\end{equation}
+Defining the sample variance (provided that it exists) $\sigma_z^2=\expval{z_{t-i-1}^2}$, Fisher information reads
+\begin{equation}
+	\I=\frac{n\sigma_z^2}{\sigma_0^2},
+\end{equation}
+and the variance of the estimator is 
+\begin{equation}\label{eq:var_a0_norm}
+	s_n^2=\frac{\sigma_0^2}{n^2\sigma_z^2}.
+\end{equation} 
+For $n\leq2$, variance is not defined so \eqref{eq:var_a0_full} should be used instead.
+
+%\ifstandalone
+%\printbibliography
+%\fi
+
+
+%\printbibliography
+%-----------------------------------------------------------
+\end{document}

@@ -1,0 +1,53 @@
+\documentclass[FinalReport.tex]{subfiles}
+
+\begin{document}
+
+\label{app:max_distrib}
+Let's consider a sequence $\{X_i\}_i$ of $N$ iid random variables and $X_{max}=\max_i\{X_i\}$ its maximum value. We are interested by the typical value of $X_{max}$ and last percentile $\Q(99\%)$ of power laws and normal distributions.
+
+\subsection{Power law}
+If $X_i$ follows a power law with exponent $\mu$, its distribution and tail function are:
+\begin{equation}\label{eq:pt_app}
+	P(x)=\frac{C}{x^{1+\mu}}, \quad P_>(x)=P(X>x)=\frac{C}{x^\mu}.
+\end{equation}
+The probability that a given value $m$ is larger than $X_{max}=\max_i \{X_i\}$ is  
+\begin{equation}
+	\Pi_<(m)=P(\max_i\{X_i\}<m)=P(X_1<m,X_2<m,\dots X_N<m).
+\end{equation}
+Thanks to independence, $\Pi_<(m)=[P_<(m)]^N=[1-P_>(m)]^N$, which we can rewrite
+\begin{equation}
+	\Pi_<(m)=e^{N\ln(1-P_>(m))}\simeq e^{-N\ln(P_>(m))},	
+\end{equation}
+where we expanded the logarithm for small values of $P_>(m)$, as they are the only one relevant in the exponential for large $N$. Using \eqref{eq:pt_app} we get
+\begin{equation}
+	\Pi_<(m)=e^{Nm^{-\mu}}	
+\end{equation}
+and the maximum value $m$ attained with probability $p$ is $m\sim (N\ln(p))^{1/\mu}$, linear in $N$ for $\mu=1$. With $N=10^6$ as in Figure \ref{fig:dist_n=1}, a typical maximum is $10^6$ with probability $p=1/e\approx 37\%$.
+For power laws like \eqref{eq:pt_app}, quantiles function is $\Q(p)=x_m(1-p)^{-1/\mu}$, where $x_m$ marks the beginning of the power tail. Unlike moments, quantiles are defined for any $\mu>0$ and is thus a more convenient statistical tool.
+
+	
+\subsection{Normal distribution}
+Now if the sequence follows $\mathcal{N}(0,\sigma_0^2)$, we take a different approach, by computing an upper bound for the expected maximum value $\E{X_{max}}$.
+By Jensen's inequality:
+\begin{equation}
+e^{t\E{X_{max}}}\leq \E{e^{tX_{max}}}=\E{\max_{i}e^{tX_i}}.
+\end{equation}
+
+Then we use $\max_i e^{tX_i}\leq \sum_i e^{tX_i}$ to get 
+\begin{equation}
+	e^{t\E{X_{max}}}\leq  \E{\sum_{i}e^{tX_i}}.
+\end{equation}
+The RHS is a sum of moment generating functions:
+\begin{equation}
+	e^{t\E{X_{max}}}\leq \E{\sum_{i}e^{tX_i}}= \sum_{i} e^{\frac{t^2\sigma_0^2}{2}}=Ne^{\frac{t^2\sigma_0^2}{2}}.
+\end{equation}
+Taking the logarithm on both sides we obtain
+\begin{equation}
+	\E{X_{max}}\leq \frac{\log(N)}{t}+\frac{t\sigma_0^2}{2}.	
+\end{equation}
+Choosing $t^*=\frac{\sqrt{2\log{N}}}{\sigma}$ to maximize the expression\footnote{One can check that $\left.\partial^2_t\right\vert_{t^*}\frac{\log(N)}{t}+\frac{t\sigma_0^2}{2}>0$.}, the expected maximum is bounded by $m_\mathcal{N}=\sigma_0\sqrt{2\ln{N}}$. Quantile function of the normal distribution is $\Q(p)=\mu+\sigma_0\sqrt{2}\textrm{erf}^{-1}(2p-1)$. For $\N(0,\sigma_0^2)$, the last percentile is $\Q(99\%)\approx2.08$.
+
+
+
+	
+\end{document}
