@@ -1,0 +1,165 @@
+\documentclass[a5paper, 12pt,landscape]{report}
+\usepackage{classicthesis}
+\usepackage{graphicx}
+\usepackage{amsmath, amssymb}
+\usepackage{mathtools}
+\usepackage[top=2.5cm, bottom=2.5cm, left=3.8cm, right=3.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{indentfirst}
+\usepackage{caption}
+\usepackage{subcaption}
+%\usepackage[colorlinks,bookmarks=false,linkcolor=red,urlcolor=blue, citecolor=black]{hyperref}
+
+\usepackage{titlesec}
+\usepackage{physics}
+\usepackage{lscape}
+\usepackage{cleveref}
+\usepackage{pgfplots}
+\usepackage{comment}
+\usepackage{tikzscale}
+\usepackage{mwe}
+\usepackage{dsfont}
+
+\usepackage{subfiles}
+
+%\usepackage[subpreambles=true]{standalone}
+%\usepackage{import}
+\begin{comment}
+\usepackage[
+backend=bibtex,
+style=numeric-comp,
+sorting=none
+]{biblatex}
+\end{comment}
+\usepackage{natbib}
+\bibliographystyle{unsrturl}
+\setcitestyle{square,numbers,comma}
+%\addbibresource{ref.bib}
+
+
+%\usepackage{apalike}
+\usepackage{stackrel}
+\usetikzlibrary{decorations.pathreplacing}
+
+\begin{comment}
+\titleformat{\chapter}[hang]{\large\sffamily}{\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\bfseries\sffamily}
+\titleformat{\section}[hang]{\bfseries\sffamily}{\thesection\quad}{0pt}{\bfseries\sffamily}
+\titleformat{\subsection}[hang]{\itshape\sffamily}{\thesubsection\quad}{0pt}{\itshape\sffamily}
+\titleformat{\paragraph}
+    {\sffamily\slshape}
+    {}
+    {0pt}
+    {}
+   \end{comment}
+\newtheorem{theorem}{Theorem}[section]
+
+%\let\oldcaption\caption
+%\renewcommand{\caption}[1]{\oldcaption{\small #1}}
+
+\newcommand{\bl}{\textcolor{blue}}
+\newcommand{\gr}{\textcolor{red}}
+
+
+\makeatletter
+\titleformat{\paragraph}
+    {\bfseries\sffamily}
+    {}
+    {0pt}
+    {}
+\newcommand{\FV}[0]{\textrm{FV}}
+\newcommand{\NPV}[0]{\textrm{NPV}}
+\newcommand{\Af}[0]{\textrm{A}_f}
+\newcommand{\Df}[0]{\textrm{D}_f}
+\newcommand{\DIV}[0]{\textrm{DIV}}
+\newcommand{\sign}[1]{\text{sign}\left(#1\right)}
+\newcommand{\widesim}[2][1.5]{
+  \mathrel{\underset{#2}{\scalebox{#1}[1]{$\sim$}}}
+}
+\renewcommand{\d}[0]{\textrm{d}}
+\newcommand{\I}[0]{\mathcal{I}}
+\newcommand{\N}[0]{\mathcal{N}}
+\newcommand{\Q}[0]{\mathcal{Q}}
+%\newcommand{\E}[1]{\mathbb{E}\left[#1\right]}
+\newcommand{\E}[1]{\expval{#1}}
+
+\DeclareMathOperator*{\argmax}{argmax} % no space, limits underneath in displays
+\DeclareMathOperator*{\argmin}{argmin} % no space, limits underneath in displays
+
+
+\def\monthyear{\ifcase\month\or
+  January\or February\or March\or April\or May\or June\or
+  July\or August\or September\or October\or November\or December\fi
+  \space\number\year}
+
+\begin{document}
+
+\begin{tikzpicture}[thick,scale=1, every node/.style={scale=.5}]
+\def\zy{400}
+\def\ztx{40}
+\def\zty{300}
+\def\zttx{80}
+\def\ztty{80}
+\def\ls{1}
+ \begin{axis}[
+ %	xlabel=$t$,
+ %	ylabel=$z$,
+ 	xtick = {0,4,8},
+ 	xticklabels = {$t-1$,$t$,$t+1$},
+ 	ytick = {0,.8,3,4},
+ 	yticklabels = {0,$z_{t+1}$,$z_{t}$,$z_{t-1}$},
+ 	height=.3\textwidth,
+ 	width=.5\textwidth,
+ 	axis lines = left,
+ 	xmin=0, xmax=10, ymin=0, ymax=5,
+	clip=false,
+    ]
+  \draw[->] (0,\zy) -- (\ztx,\zty) ;
+  \draw[dotted] (0,\zty) -- (\ztx+\ls,\zty)  ;
+  \draw[dotted] (0,\zy) -- (\ztx+\ls,\zy) ;
+  \draw[decorate,
+    decoration = {brace, mirror}] (\ztx+\ls,\zty) --  node[right] {$\,\,\alpha_0-c_{t-1}>0$} (\ztx+\ls,\zy); 
+  \draw[dashed,->] (\ztx,\zty) -- (\zttx,\ztty)  ;
+  \draw[dotted] (0,\ztty) -- (\zttx+\ls,\ztty)  ;
+  \draw[dotted] (0,\zty) -- (\zttx+\ls,\zty)  ;
+  \draw[decorate,
+    decoration = {brace, mirror}] (\zttx+\ls,\ztty) --  node[right] {$\,\,\alpha_0-(c_{t-1}+\eta)$} (\zttx+\ls,\zty); 
+ \end{axis}
+\end{tikzpicture}
+\hfill
+\begin{tikzpicture}[thick,scale=1, every node/.style={scale=.5}]
+\def\zy{20}
+\def\ztx{40}
+\def\zty{140}
+\def\zttx{80}
+\def\ztty{100}
+\def\ls{1}
+ \begin{axis}[
+  	axis x line = center,
+  	axis y line = left,
+ %	xlabel=$t$,
+ %	ylabel=$z$,
+ 	xtick = {0,4,8},
+ 	xticklabels = {$t-1$,$t$,$t+1$},
+ 	ytick = {-4,0,4,8},
+ 	yticklabels = {$z_{t-1}$,0,$z_{t+1}$,$z_{t}$},
+ 	height=.3\textwidth,
+ 	width=.5\textwidth,
+ 	xmin=0, xmax=10, ymin=-6, ymax=10,
+	clip=false,
+    ]
+  \draw[->] (0,\zy) -- (\ztx,\zty) ;
+  \draw[dotted] (0,\zty) -- (\ztx+\ls,\zty)  ;
+  \draw[dotted] (0,\zy) -- (\ztx+\ls,\zy) ;
+  \draw[decorate,
+    decoration = {brace}] (\ztx+\ls,\zty) --  node[right] {$\,\,\alpha_0-c_{t-1}<0$} (\ztx+\ls,\zy); 
+  \draw[dashed,->] (\ztx,\zty) -- (\zttx,\ztty)  ;
+  \draw[dotted] (0,\ztty) -- (\zttx+\ls,\ztty)  ;
+  \draw[dotted] (0,\zty) -- (\zttx+\ls,\zty)  ;
+  \draw[decorate,
+    decoration = {brace, mirror}] (\zttx+\ls,\ztty) --  node[right] {$\,\,\alpha_0-(c_{t-1}-\eta)$} (\zttx+\ls,\zty); 
+ \end{axis}
+\end{tikzpicture}
+
+
+\end{document}
