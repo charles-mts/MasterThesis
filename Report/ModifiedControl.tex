@@ -1,6 +1,6 @@
 \documentclass[FinalReport.tex]{subfiles}
 \begin{document}
-For controls that takes into account few past observations only, simulations are heavy tailed. Taking the extreme case $n=1$ we propose to add a regularization, to hinder extreme deviations. When $\abs{z_t/z_{t-1}}$ exceeds a threshold $\varepsilon>0$ it is replaced by a positive constant $\eta$. This constant step must be taken in the right direction (i.e. such that $c_t$ gets closer to $\alpha_0$), which is given by the sign of $z_t/z_{t-1}$ (see Figure \ref{fig:new_cont_scheme}). The new map reads:
+For controllers that takes into account few past observations only, solutions are heavy tailed. Taking the extreme case $n=1$ we propose a natural modification to hinder extreme deviations. When $\abs{z_t/z_{t-1}}$ exceeds a threshold $\varepsilon>0$ it is replaced by a positive constant $\eta$. This constant step must be taken in the right direction (i.e. such that $c_t$ gets closer to $\alpha_0$), which is given by the sign of $z_t/z_{t-1}$ (see Figure \ref{fig:new_cont_scheme}). The new map reads:
 \begin{subequations}
 \begin{align}	
 	z_{t+1}&=(\alpha_0-c_t)z_t+\beta_t\\
@@ -20,7 +20,7 @@ For controls that takes into account few past observations only, simulations are
 \caption{Schematic representation of the modification proposed. Left: $\sign{\frac{z_t}{z_{t-1}}}=1$, Right: $\sign{\frac{z_t}{z_{t-1}}}=-1$. At each time step a constant is either added or subtracted to the previous estimate, in order to minimize the error $\abs{\alpha_0-c_t}$.}
 \label{fig:new_cont_scheme}
 \end{figure}
-Final distribution depends heavily on the choice of those two parameters. From simple heuristic arguments one can reduce the range of parameters to consider: First, when $\varepsilon$ is too large, regularization is rarely engaged hence results are unchanged. We therefore restrict the analysis to $\varepsilon<1$, meaning that original controller is replaced only when the time series is growing ($\abs{z_t/z_{t-1}}>1$). Secondly, $\eta$ gives the maximal precision the estimator can achieve on $\alpha_0$, and should thus be small enough. As for $\varepsilon$, we focus on the values $\eta<1$.
+Final distribution depends heavily on the choice of those two parameters. From simple heuristic arguments one can reduce the range of parameters to consider: First, when $\varepsilon$ is too large, regularization is rarely engaged hence results are unchanged. We therefore restrict the analysis to $\varepsilon<1$, meaning that original controller is always replaced when the time series is growing ($\abs{z_t/z_{t-1}}>1$). Secondly, $\eta$ gives the maximal precision the estimator can achieve on $\alpha_0$, and should thus be small enough. As for $\varepsilon$, we only consider $\eta<1$.
 
 
 
@@ -48,7 +48,7 @@ Both the maximum and last percentile exhibit an abrupt transition at $\eta^*=4\c
 	\label{fig:nc_conv}	
 \end{figure}
  
- If $\eta$ is to small the excitation $(\alpha_0-c_t)$ therefore stays larger than one during many time-steps, putting the time series on an explosive track. Above $\eta^*$, the controller gets closer to $\alpha_0$ sufficiently early and prevents the time series from diverging, even though it may take a long time reach a stationary regime. For Figure \ref{fig:quant_max}, the first $1000$ time-steps ($10\%$ of total time) are omitted to focus on the stationary regime only. This threshold obviously depends on $\alpha_0$, in a piecewise linear way  (Figure \ref{fig:eta_div_a0_s0}). Noise dependence exhibits a transition at $\sigma_0^2=1$. Above, noise is strong enough to compensate a large excitation factor $(\alpha_0-c_t)$, allowing $z_t$ to leave the initially divergent trajectory.
+ If $\eta$ is to small the excitation $(\alpha_0-c_t)$ therefore stays larger than one during many time-steps, putting the time series on an explosive track. Above $\eta^*$, the controller gets closer to $\alpha_0$ sufficiently early and prevents the time series from diverging, even though it may take a long time reach a stationary regime. For Figure \ref{fig:quant_max}, the first $1000$ time-steps ($10\%$ of total time) are omitted to focus on the stationary regime. This threshold obviously depends on $\alpha_0$, in a piecewise linear way  (Figure \ref{fig:eta_div_a0_s0}). Noise dependence exhibits a transition at $\sigma_0^2=1$. Above, noise is strong enough to compensate a large excitation factor $(\alpha_0-c_t)$, allowing $z_t$ to leave the initially divergent trajectory.
 
 \begin{figure}[h!]
 \centering
@@ -82,7 +82,7 @@ From those observations we have seen that several regime arise given $\varepsilo
 	\label{fig:mu_nc}	
 \end{figure}
 
-All those observations suggest to focus on the "central" region, where statistics is close to Gaussian distribution. For a deeper analysis of the final distribution we select $\varepsilon=0.1$ and $\eta=0.05$. Figure \ref{fig:ts_n1_nc} compares the solution of the original MLE control with the proposed control. Figure \ref{fig:dist_n1_nc} shows $P_>(z_t)$ in both case. The distribution with modified control is indeed Gaussian. Kolmogorov-Smirnov test gives a distance $1.17\cdot10^{-3}$ and a $p-$value of $0.49$, meaning that the solution is very likely normally distributed.
+All those observations suggest to focus on the "central" region, where statistics is close to Gaussian distribution. For a deeper analysis of the final distribution we select $\varepsilon=0.1$ and $\eta=0.05$. Figure \ref{fig:ts_n1_nc} compares the solution of the original MLE control with the proposed control. Figure \ref{fig:dist_n1_nc} shows $P_>(z_t)$ in both case. The distribution with modified control is indeed Gaussian. Kolmogorov-Smirnov test gives a distance $1.17\cdot10^{-3}$ with $p-$value $0.49$, meaning that the solution is very likely normally distributed.
 
 
 The modification proposed achieves optimal control, yielding a Gaussian distribution without large deviations ($\max{z_t}=4.8$).
@@ -102,13 +102,13 @@ The modification proposed achieves optimal control, yielding a Gaussian distribu
 	\centering
 	\makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{Graphs/dist_n1_nc}}
 	%\includegraphics[width=.5\textwidth]{example-image-a}
-	\caption{CCDF of simulations from Figure \ref{fig:ts_n1_nc}. Original MLE controller (Left) and proposed modification (Right), with $\varepsilon=0.1$ and $\eta=0.05$. The final distribution with regularization is very close to a $\N(0,\sigma_0^2)$ (orange), indicating optimal control. 
+	\caption{CCDF of simulations from Figure \ref{fig:ts_n1_nc}. Original MLE controller (Left) and proposed modification (Right), with $\varepsilon=0.1$ and $\eta=0.05$. Final distribution with regularization is very close to $\N(0,\sigma_0^2)$ (orange), indicating optimal control. 
 	All parameters are identical: $\alpha_0=2$, $\sigma_0^2=0.8$, $z_0=1$, $N=10^6$. Left plot is in log-log to make the power law visible.}
 	\label{fig:dist_n1_nc}	
 \end{figure}
 
 \section{Simplification of the model}
-All those observations confirm that the modification proposed is indeed able to make the controller optimal, in the sense that $z_t\sim P_\beta=\mathcal{N}(0,\sigma_0^2)$. However this result depends heavily on the choice of $\varepsilon$ and $\eta$. Even though we obtained good result with $(\varepsilon,\eta)=(0.1,0.5)$, this choice is arbitrary. By reducing to one the number of free parameters, it is easier to numerically optimize the value.
+All those observations confirm that the modification proposed is indeed able to make the controller optimal, in the sense that $z_t\sim =\mathcal{N}(0,\sigma_0^2)$. However this result depends heavily on the choice of $\varepsilon$ and $\eta$. Even though we obtained good result with $(\varepsilon,\eta)=(0.1,0.5)$, this choice is arbitrary. By reducing to one the number of free parameters, it is easier to numerically optimize the value.
 
 A first simplification could be to set $\eta=\varepsilon$, as results are typically better along this line for large $\varepsilon$ (data not shown). The map then reduces to
 \begin{equation}\label{eq:simp-1}
@@ -128,7 +128,7 @@ $N=10^4$, $\alpha_0=2$, $\sigma_0^2=0.8$, $z_0=1$.}
 \end{figure}
 
 
-Distribution $P(z_t)$ is not a power law anymore, thus we can also study its variance. In the case $\varepsilon=0$ it reads
+Distribution $P(z_t)$ is not a power law anymore, thus it has finite variance. In the case $\varepsilon=0$ it reads
 \begin{align}
 	\expval{z_{t+1}^2}&=\expval{\left[\left(\alpha_0-c_{t-1}-\eta\,\sign{\frac{z_t}{z_{t-1}}}\right)z_t +\beta_t\right]^2}.
 \end{align}

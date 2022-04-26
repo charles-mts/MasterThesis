@@ -1,19 +1,5 @@
-@article{OptCont,
-author="Eurich, Christian W.
-and Pawelzik, Klaus",
-editor="Duch, W{\l}odzis{\l}aw
-and Kacprzyk, Janusz
-and Oja, Erkki
-and Zadro{\.{z}}ny, S{\l}awomir",
-title="Optimal Control Yields Power Law Behavior",
-booktitle="Artificial Neural Networks: Formal Models and Their Applications -- ICANN 2005",
-year="2005",
-publisher="Springer Berlin Heidelberg",
-address="Berlin, Heidelberg",
-pages="365--370",
-abstract="Power law tails can be observed in the statistics of human motor control such as the balancing of a stick at the fingertip. We derive a simple control algorithm that employs optimal parameter estimation based on past observations. The resulting control system self-organizes into a critical regime, whereby the exponents of power law tails do not depend on system parameters. The occurrence of power laws is robust with respect to the introduction of delays and a variation in the length of the memory trace. Our results suggest that multiplicative noise causing scaling behavior may result from optimal control.",
-isbn="978-3-540-28756-8"
-}
+
+@inproceedings{OptCont, author = {Eurich, Christian W. and Pawelzik, Klaus}, title = {Optimal Control Yields Power Law Behavior}, year = {2005}, isbn = {3540287558}, publisher = {Springer-Verlag}, address = {Berlin, Heidelberg}, abstract = {Power law tails can be observed in the statistics of human motor control such as the balancing of a stick at the fingertip. We derive a simple control algorithm that employs optimal parameter estimation based on past observations. The resulting control system self-organizes into a critical regime, whereby the exponents of power law tails do not depend on system parameters. The occurrence of power laws is robust with respect to the introduction of delays and a variation in the length of the memory trace. Our results suggest that multiplicative noise causing scaling behavior may result from optimal control.}, booktitle = {Proceedings of the 15th International Conference on Artificial Neural Networks: Formal Models and Their Applications - Volume Part II}, pages = {365–370}, numpages = {6}, location = {Warsaw, Poland}, series = {ICANN'05} }
 
 
 @book{CritPhenom,
@@ -22,7 +8,7 @@ language = {eng},
 lccn = {2003060831},
 publisher = {Springer},
 series = {Springer series in synergetics},
-title = {Critical phenomena in natural sciences : chaos, fractals, selforganization, and disorder : concepts and tools / Didier Sornette.},
+title = {Critical phenomena in natural sciences : chaos, fractals, selforganization, and disorder : concepts and tools.},
 year = {2004},
 author = {Sornette, Didier},
 address = {Berlin ;},
@@ -32,7 +18,7 @@ isbn = {3540407545},
 }
 
 
-@ARTICLE{FrontNanoScience,
+@article{FrontNanoScience,
   
 AUTHOR={Patzelt, Felix and Riegel, Markus and Ernst, Udo and Pawelzik, Klaus},   
 	 
@@ -40,9 +26,8 @@ TITLE={Self-organized critical noise amplification in human closed loop control}
 	
 JOURNAL={Frontiers in Computational Neuroscience},      
 	
-VOLUME={1},      
 
-PAGES={4},     
+PAGES={ 4},     
 	
 YEAR={2007},      
 	
@@ -121,10 +106,8 @@ author = {Harry Kesten},
 title = {{Random difference equations and Renewal theory for products of random matrices}},
 volume = {131},
 journal = {Acta Mathematica},
-number = {none},
 publisher = {Institut Mittag-Leffler},
 pages = {207 -- 248},
-abstract = {},
 year = {1973},
 doi = {10.1007/BF02392040},
 }
@@ -158,13 +141,13 @@ doi = {10.1214/aoap/1177005985},
 }
 
 
-@misc{moments,
-      title={Moments and Absolute Moments of the Normal Distribution}, 
-      author={Andreas Winkelbauer},
-      year={2014},
-      eprint={1209.4340},
-      archivePrefix={arXiv},
-      primaryClass={math.ST}
+@article{moments,
+  title={Moments and Absolute Moments of the Normal Distribution},
+  author={Andreas Winkelbauer},
+  journal={ArXiv},
+  year={2012},
+  volume={abs/1209.4340},
+  doi={10.48550/arXiv.1209.4340}
 }
 
 
@@ -214,18 +197,25 @@ abstract = {We consider limit distributions of extremes of a process {Yn} satisf
 }
 
 
-@techreport{kesten-econ,
- title = "Power Laws in Economics and Finance",
- author = "Gabaix, Xavier",
- institution = "National Bureau of Economic Research",
- type = "Working Paper",
- series = "Working Paper Series",
- number = "14299",
- year = "2008",
- month = "September",
- doi = {10.3386/w14299},
- abstract = {A power law is the form taken by a large number of surprising empirical regularities in economics and finance. This article surveys well-documented empirical power laws concerning income and wealth, the size of cities and firms, stock market returns, trading volume, international trade, and executive pay. It reviews detail-independent theoretical motivations that make sharp predictions concerning the existence and coefficients of power laws, without requiring delicate tuning of model parameters. These theoretical mechanisms include random growth, optimization, and the economics of superstars coupled with extreme value theory. Some of the empirical regularities currently lack an appropriate explanation. This article highlights these open areas for future research.},
+@article{kesten-econ,
+author = {Gabaix, Xavier},
+title = {Power Laws in Economics and Finance},
+journal = {Annual Review of Economics},
+volume = {1},
+number = {1},
+pages = {255-294},
+year = {2009},
+doi = {10.1146/annurev.economics.050708.142940},
+
+},
+eprint = { 
+        https://doi.org/10.1146/annurev.economics.050708.142940
+    
 }
+,
+    abstract = { A power law (PL) is the form taken by a large number of surprising empirical regularities in economics and finance. This review surveys well-documented empirical PLs regarding income and wealth, the size of cities and firms, stock market returns, trading volume, international trade, and executive pay. It reviews detail-independent theoretical motivations that make sharp predictions concerning the existence and coefficients of PLs, without requiring delicate tuning of model parameters. These theoretical mechanisms include random growth, optimization, and the economics of superstars, coupled with extreme value theory. Some empirical regularities currently lack an appropriate explanation. This article highlights these open areas for future research. }
+}
+
 
 
 @article{mult-proc-kesten,

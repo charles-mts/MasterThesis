@@ -12,7 +12,7 @@ where $\xi_t\sim\mathcal{N}(0,1)$. Replacing in the dynamical equation \eqref{eq
 \end{equation}
 This stochastic equation, known as a Kesten process \cite{kesten}, is a mixture of multiplicative and additive process, with $a_t$ and $\beta_t$ i.i.d. normally distributed random variables. This process has been used in different disciplines, such as in the modeling of 1D disordered systems \cite{kesten-process-physics}, the study of synaptic size dynamics \cite{kesten-process-synapse-2,kesten-synapses} and economics \cite{kesten-econ}.
 
-The average of \eqref{eq:dyn_kesten} squared,
+The second moment of \eqref{eq:dyn_kesten},
 \begin{equation}
 	\E{z_{t+1}^2}=\E{a_t^2}\E{z_t^2}+\E{\beta_t^2},	
 \end{equation}
@@ -41,10 +41,10 @@ Using renewal theory, Kesten and Goldie proved \cite{kesten,goldie} the followin
  \end{equation}
 \end{enumerate}
 Condition \ref{item:1st_cond} simply states that $\beta_t$ doesn't have a fatter tail than $x^{-(1+\mu)}$, which is the case for Gaussian noise. The third condition is also met as $a_t$ is normally distributed. Equation \eqref{eq:cond_kest}, which holds for $\mu<2$ \cite{TST}, provides an effective way to compute the exponent $\mu$. Replacing $a_t=s_n\xi_t$ gives
-\begin{equation}
+\begin{equation}\label{eq:cond_kest_norm}
 	1\stackrel{!}{=}\E{\abs{a_t}^\mu}=\E{s_n^\mu \abs{\xi_t}^\mu}.
 \end{equation}
-This development is valid when $\hat{\alpha}_0^{(n)}$ is normally distributed, in which case $s_n=\sigma_0/(n\sigma_z)$. The condition becomes
+This development is valid when $\hat{\alpha}_0^{(n)}$ is normally distributed, in which case $s_n=\sigma_0/(n\sigma_z)$. \eqref{eq:cond_kest_norm} becomes
 \begin{equation}\label{eq:cond_kest_1}
 	1\stackrel{!}{=}\E{\abs{a_t}^\mu}=s_n^\mu\E{ \abs{\xi_t}^\mu}=\frac{1}{n^\mu} \left(\frac{\sigma_0}{\sigma_z}\right)^\mu\E{\abs{\xi_t}^\mu}.
 \end{equation}
@@ -60,11 +60,11 @@ i.e. $n\propto \left[\frac{1}{\sqrt{\pi}} \Gamma\left(\frac{\mu+1} 2 \right)\rig
 \begin{equation}
 	\Gamma\left(\frac{\mu+1}{2}\right)=\sqrt{\frac{\pi}{\mu+1}}\,{\left(\frac{\mu+1}{2e}\right)}^{(\mu+1)/2} +\mathcal{O}\left(\frac{1}{\mu}\right), 
 \end{equation}
-which gives 
+one gets
 \begin{equation}\label{eq:mu_kesten}
 	n\sim (\mu+1)^{-1/2\mu + (\mu+1)/2\mu}\sim (\mu+1)^{1/2}.
 \end{equation}
-This result seems in contradiction with Figure \ref{fig:max_exp_n}, but one should remind that it is valid only for large $n$, as it relies on Gaussian approximation of the estimator. However, numerical simulations have shown a shrinking tail for large $n$. Indeed, this predicted power law distribution holds for the tail only. As $n$ increases, the cutoff separating the tail gets larger, until it gets larger than the maximum deviation observed. At this point $P(z_t)$ is normally distributed. The final result \eqref{eq:mu_kesten} of this derivation is consequently not usable in practice, but still provides a theoretical basis demonstrating the intrinsic scaling behavior of \eqref{eq:map}. Besides, even though $c_t$ is not necessarily normally distributed for smaller $n$, equation \eqref{eq:cond_kest} holds as long the distribution of $\alpha_0-c_t$ respects the conditions stated above. This approach thus justifies the power law distribution qualitatively, and allows to compute the exponent if the distribution of $c_t$ is known.
+This result seems in contradiction with Figure \ref{fig:max_exp_n}, but one should remind that it is valid only for large $n$, as it relies on a Gaussian approximation of the estimator. However, numerical simulations have shown a shrinking tail for large $n$. Indeed, this predicted power law distribution holds for the tail only. As $n$ increases, the cutoff separating the tail gets larger, until it exceeds maximum deviation observed. At this point $P(z_t)$ is normally distributed. The final result \eqref{eq:mu_kesten} of this derivation is consequently not usable in practice, but still provides a theoretical basis demonstrating the intrinsic scaling behavior of \eqref{eq:map}. Besides, even though $c_t$ is not necessarily normally distributed for smaller $n$, equation \eqref{eq:cond_kest} holds as long the distribution of $\alpha_0-c_t$ respects the conditions stated above. This approach thus justifies the power law distribution qualitatively, and allows to compute the exponent if the distribution of $c_t$ is known.
   
 
 
